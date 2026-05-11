@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MemoryFlix</title>
+<title>SKLoveWorld</title>
 
 <style>
 
@@ -39,10 +39,11 @@ body{
 }
 
 .netflix-intro span{
-  font-size:120px;
+  font-size:90px;
   font-weight:bold;
   color:#e50914;
   animation:netflixZoom 3s ease forwards;
+  letter-spacing:5px;
 }
 
 @keyframes netflixZoom{
@@ -81,6 +82,7 @@ body{
   color:#e50914;
   font-size:60px;
   margin-bottom:20px;
+  text-align:center;
 }
 
 #password{
@@ -145,6 +147,12 @@ body{
   height:160px;
   object-fit:cover;
   border-radius:10px;
+  border:3px solid transparent;
+  transition:0.3s;
+}
+
+.profile:hover img{
+  border-color:#e50914;
 }
 
 .profile p{
@@ -170,7 +178,7 @@ body{
   content:'';
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,0.6);
+  background:rgba(0,0,0,0.65);
 }
 
 .hero-content{
@@ -191,6 +199,11 @@ body{
   border-radius:5px;
   cursor:pointer;
   font-size:16px;
+  transition:0.3s;
+}
+
+.watch-btn:hover{
+  background:#ff1f1f;
 }
 
 /* GALLERY */
@@ -326,7 +339,7 @@ body{
 <div id="loader">
 
   <div class="netflix-intro">
-    <span>M</span>
+    <span>SK</span>
   </div>
 
 </div>
@@ -335,7 +348,7 @@ body{
 
 <div id="login-screen">
 
-  <h1>MEMORYFLIX</h1>
+  <h1>SKLOVEWORLD</h1>
 
   <input 
     type="password"
@@ -396,7 +409,7 @@ body{
     <div class="hero-content">
 
       <h1 id="profile-title">
-        MemoryFlix ❤️
+        SKLoveWorld ❤️
       </h1>
 
       <button 
