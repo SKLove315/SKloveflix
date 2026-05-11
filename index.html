@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>MemoryFlix</title>
 
 <style>
@@ -20,11 +21,8 @@ body{
   color:white;
   overflow-x:hidden;
 }
-  .hidden{
-  display:none;
-}
 
-#popup.hidden{
+.hidden{
   display:none !important;
 }
 
@@ -38,7 +36,6 @@ body{
   justify-content:center;
   align-items:center;
   z-index:10000;
-  animation:hideLoader 4s forwards;
 }
 
 .netflix-intro span{
@@ -49,6 +46,7 @@ body{
 }
 
 @keyframes netflixZoom{
+
   0%{
     opacity:0;
     transform:scale(0.2);
@@ -63,18 +61,7 @@ body{
     opacity:1;
     transform:scale(1);
   }
-}
 
-@keyframes hideLoader{
-  0%,90%{
-    opacity:1;
-    visibility:visible;
-  }
-
-  100%{
-    opacity:0;
-    visibility:hidden;
-  }
 }
 
 /* LOGIN */
@@ -102,6 +89,7 @@ body{
   border:none;
   border-radius:5px;
   margin-bottom:15px;
+  outline:none;
 }
 
 #login-btn{
@@ -111,6 +99,7 @@ body{
   border:none;
   border-radius:5px;
   cursor:pointer;
+  font-size:16px;
 }
 
 #error{
@@ -126,6 +115,7 @@ body{
   justify-content:center;
   align-items:center;
   flex-direction:column;
+  background:#141414;
 }
 
 #profile-screen h1{
@@ -173,6 +163,7 @@ body{
   display:flex;
   align-items:center;
   padding-left:60px;
+  transition:1s;
 }
 
 .hero::after{
@@ -199,10 +190,17 @@ body{
   color:white;
   border-radius:5px;
   cursor:pointer;
+  font-size:16px;
 }
+
+/* GALLERY */
 
 .section{
   padding:40px;
+}
+
+.section h2{
+  margin-bottom:25px;
 }
 
 .gallery{
@@ -268,6 +266,7 @@ body{
   display:none;
   justify-content:space-around;
   padding:12px;
+  z-index:999;
 }
 
 .mobile-nav button{
@@ -275,7 +274,10 @@ body{
   border:none;
   color:white;
   font-size:28px;
+  cursor:pointer;
 }
+
+/* MOBILE */
 
 @media(max-width:768px){
 
@@ -287,8 +289,16 @@ body{
     padding-bottom:80px;
   }
 
+  .hero{
+    padding-left:25px;
+  }
+
   .hero-content h1{
     font-size:42px;
+  }
+
+  #profile-screen h1{
+    font-size:36px;
   }
 
   .gallery{
@@ -298,6 +308,12 @@ body{
   .gallery img{
     height:220px;
   }
+
+  .profile img{
+    width:120px;
+    height:120px;
+  }
+
 }
 
 </style>
@@ -305,23 +321,37 @@ body{
 
 <body>
 
+<!-- LOADER -->
+
 <div id="loader">
+
   <div class="netflix-intro">
     <span>M</span>
   </div>
+
 </div>
+
+<!-- LOGIN -->
 
 <div id="login-screen">
 
   <h1>MEMORYFLIX</h1>
 
-  <input type="password" id="password" placeholder="Enter Password">
+  <input 
+    type="password"
+    id="password"
+    placeholder="Enter Password"
+  >
 
-  <button id="login-btn">Enter</button>
+  <button id="login-btn">
+    Enter
+  </button>
 
   <p id="error"></p>
 
 </div>
+
+<!-- PROFILE SCREEN -->
 
 <div id="profile-screen" class="hidden">
 
@@ -329,24 +359,35 @@ body{
 
   <div class="profiles">
 
-    <div class="profile" onclick="openProfile('first-meet','First Meet')">
+    <div 
+      class="profile"
+      onclick="openProfile('first-meet','First Meet')"
+    >
       <img src="images/profiles/firstmeet.png">
       <p>First Meet</p>
     </div>
 
-    <div class="profile" onclick="openProfile('us','US')">
+    <div 
+      class="profile"
+      onclick="openProfile('us','US')"
+    >
       <img src="images/profiles/us.png">
       <p>US</p>
     </div>
 
-    <div class="profile" onclick="openProfile('best-memos','Best Memos')">
+    <div 
+      class="profile"
+      onclick="openProfile('best-memos','Best Memories')"
+    >
       <img src="images/profiles/memos.png">
-      <p>Best Memos</p>
+      <p>Best Memories</p>
     </div>
 
   </div>
 
 </div>
+
+<!-- WEBSITE -->
 
 <div id="website" class="hidden">
 
@@ -354,9 +395,14 @@ body{
 
     <div class="hero-content">
 
-      <h1 id="profile-title">MemoryFlix ❤️</h1>
+      <h1 id="profile-title">
+        MemoryFlix ❤️
+      </h1>
 
-      <button class="watch-btn" onclick="scrollToGallery()">
+      <button 
+        class="watch-btn"
+        onclick="scrollToGallery()"
+      >
         Watch Memories
       </button>
 
@@ -374,6 +420,8 @@ body{
 
 </div>
 
+<!-- POPUP -->
+
 <div id="popup" class="hidden">
 
   <span id="close-popup">&times;</span>
@@ -381,6 +429,8 @@ body{
   <img id="popup-img">
 
 </div>
+
+<!-- MOBILE NAV -->
 
 <div class="mobile-nav">
 
@@ -394,7 +444,11 @@ body{
 
 <script>
 
+/* PASSWORD */
+
 const PASSWORD = "31507";
+
+/* IMAGE DATA */
 
 const profileData = {
 
@@ -415,21 +469,27 @@ const profileData = {
 
 };
 
+/* LOADER */
+
 window.addEventListener("load",()=>{
 
   setTimeout(()=>{
 
-    document.getElementById("loader").style.display="none";
+    document.getElementById("loader")
+      .style.display = "none";
 
-  },4000);
+  },3000);
 
 });
 
-document.getElementById("login-btn")
-.addEventListener("click",()=>{
+/* LOGIN */
+
+function login(){
 
   const enteredPassword =
-    document.getElementById("password").value;
+    document.getElementById("password")
+    .value
+    .trim();
 
   if(enteredPassword === PASSWORD){
 
@@ -446,7 +506,23 @@ document.getElementById("login-btn")
 
   }
 
+}
+
+document.getElementById("login-btn")
+.addEventListener("click",login);
+
+document.getElementById("password")
+.addEventListener("keypress",(e)=>{
+
+  if(e.key === "Enter"){
+
+    login();
+
+  }
+
 });
+
+/* OPEN PROFILE */
 
 function openProfile(folder,title){
 
@@ -479,6 +555,8 @@ function openProfile(folder,title){
 
 }
 
+/* BACK */
+
 function backToProfiles(){
 
   document.getElementById("website")
@@ -489,11 +567,15 @@ function backToProfiles(){
 
 }
 
+/* SCROLL */
+
 function scrollToGallery(){
 
   window.scrollTo({
+
     top:window.innerHeight,
     behavior:"smooth"
+
   });
 
 }
@@ -501,11 +583,15 @@ function scrollToGallery(){
 function scrollToTop(){
 
   window.scrollTo({
+
     top:0,
     behavior:"smooth"
+
   });
 
 }
+
+/* POPUP */
 
 const popup =
   document.getElementById("popup");
@@ -515,8 +601,12 @@ const popupImg =
 
 document.addEventListener("click",(e)=>{
 
-  if(e.target.tagName === "IMG" &&
-     e.target.parentElement.id !== "popup"){
+  if(
+
+    e.target.tagName === "IMG" &&
+    e.target.closest(".gallery")
+
+  ){
 
     popup.classList.remove("hidden");
 
@@ -533,10 +623,24 @@ document.getElementById("close-popup")
 
 });
 
+popup.addEventListener("click",(e)=>{
+
+  if(e.target.id === "popup"){
+
+    popup.classList.add("hidden");
+
+  }
+
+});
+
+/* HERO SLIDER */
+
 const heroImages = [
+
   "images/banner.jpg",
   "images/first-meet/1.jpg",
   "images/us/1.jpg"
+
 ];
 
 let currentHero = 0;
